@@ -1,0 +1,48 @@
+header{
+  background-color: black;
+  color: white;
+  padding: 50px 120px;
+}
+header h2{
+  width: 54%;
+}
+header hr {
+  background-color: #fff;
+  color: white;
+}
+.wrapper-card-covid{
+  display: flex;
+  justify-content: space-between;
+}
+.card-covid{
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 33%;
+  border: 1px solid;
+}
+
+.blue{
+  background-color: rgb(72, 72, 255);
+  color: white
+}
+.red{
+  color: white;
+  background-color: rgb(248, 68, 68);
+}
+.green{
+  color: white;
+  background-color: rgb(39, 252, 39);
+}
+.icon-arrow-up{
+  width: 25px;
+  height: 25px; 
+}
+
+.icon-arrow-up > img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.list-country:hover{
+  transform: scale(1.01);
+}
