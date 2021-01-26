@@ -4,11 +4,11 @@ import {useSelector} from 'react-redux'
 const DetailCovid = (props) => {
   console.log(props.location.state)
   const stateRedux = useSelector(state => state)
-  const covidReduce = stateRedux.covidReduce
-  console.log(covidReduce)
+  const dataCovid = stateRedux.covid
+  console.log(dataCovid)
   return (
     <div>
-      <p className="text-danger">Deaths {covidReduce.deaths}</p>
+      <p className="text-danger">Deaths {dataCovid.deaths}</p>
     </div>
   );
 }

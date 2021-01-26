@@ -1,7 +1,7 @@
 import React from 'react'
 import Route from './config/route'
 import { Provider } from 'react-redux'
-import store from './redux/store'
+import store from './config/redux/store'
 
 function App() {
   return (

@@ -1,0 +1,1 @@
+export const setUser = (params) => ({type: 'SET_USER', payload: params})

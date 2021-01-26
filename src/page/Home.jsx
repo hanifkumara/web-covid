@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import CardCovid from '../components/CardCovid'
 import { useDispatch, useSelector } from 'react-redux'
+import { decrement, increment } from '../config/redux/actions/count';
+import { setUser } from '../config/redux/actions/user';
+import { getSummaryCovid } from '../config/redux/actions/covid';
 
 const Home = (props) => {
     const [username, setUsername] = useState('')
-    const stateReduce = useSelector(state => state)
-    // const { count, name } = stateReduce.countReduce
-    const { name } = stateReduce.userReducer
-    const dataCovid = stateReduce.covidReduce
+    const stateRedux = useSelector(state => state)
+    const { count } = stateRedux.count
+    const { name } = stateRedux.user
+    const dataCovid = stateRedux.covid.allStatus
     const dispatch = useDispatch()
     const handleDetail = () => {
         props.history.push({ 
@@ -15,6 +18,9 @@ const Home = (props) => {
             state: 'Hello hanif'
            });
     }
+    useEffect(() => {
+        dispatch(getSummaryCovid())
+    }, []);
     return (
         <div>
             <header>
@@ -26,13 +32,16 @@ const Home = (props) => {
                 <div className="row">
                     <div className="col-md-12" id="section2">
                         <CardCovid data={dataCovid}/>
-                        {/* {count} */}
+                        {count}
                         <br/>
                         {name}
-                        <div className="btn btn-primary" onClick={ () => dispatch({type: 'SET_INCREMENT'})}>Increment</div>
-                        <div className="btn btn-danger" onClick={ () => dispatch({type: 'SET_DECREMENT'})}>Decrement</div>
-                        <input type="text" onChange={ (e) => setUsername(e.target.value)}/>
-                        <div className="btn btn-info" onClick={() => dispatch({type: 'SET_USER', payload: username})}>Submit</div>
+                        <div className="btn btn-primary" onClick={ () => dispatch(increment())}>Increment</div>
+                        <div className="btn btn-danger" onClick={ () => count > 0 && dispatch(decrement())}>Decrement</div>
+                        <input type="text" value={username} onChange={ (e) => setUsername(e.target.value)}/>
+                        <div className="btn btn-info" onClick={() => {
+                            setUsername('')
+                            dispatch(setUser(username))}
+                        }>Submit</div>
                     </div>
                 </div>
                 <div className="row">
