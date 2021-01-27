@@ -1,33 +1,70 @@
 const initialCovid ={
-  allStatus: [
-      {
-          title: 'Confirm',
-          total: 200000,
-          background: 'blue',
-          model: 'card-covid'
-      },
-      {
-          title: 'Deaths',
-          total: 2000,
-          background: 'red',
-          model: 'card-covid'
-      },
-      {
-          title: 'Recovered',
-          total: 15000,
-          background: 'green',
-          model: 'card-covid'
-      }
-  ],
-  summaryCovid: []
+  allStatusCovid: [],
+  summaryCovid: [],
+  statusCountry: [],
+  statusByCountry: []
 }
-
 
 const covidReducer = (state = initialCovid, action) => {
   if (action.type === 'SET_COVID') {
     return {
       ...state,
-      summaryCovid: action.payload
+      allStatusCovid: [
+        {
+          title: 'Confirm',
+          total: action.payload.Global.TotalConfirmed,
+          newTotal: action.payload.Global.NewConfirmed,
+          background: 'blue',
+          model: 'card-covid'
+        },
+        {
+          title: 'Deaths',
+          total: action.payload.Global.TotalDeaths,
+          newTotal: action.payload.Global.NewDeaths,
+          background: 'red',
+          model: 'card-covid'
+        },
+        {
+          title: 'Recovered',
+          total: action.payload.Global.TotalRecovered,
+          newTotal: action.payload.Global.NewRecovered,
+          background: 'green',
+          model: 'card-covid'
+        }
+      ],
+      summaryCovid: action.payload.Countries
+    }
+  } else if (action.type === 'SET_STATUS_COUNTRY') {
+    return {
+      ...state,
+      statusCountry: action.payload
+    }
+  } else if (action.type === 'SET_STATUS_BY_COUNTRY') {
+    return {
+      ...state,
+      statusByCuntry: [
+        {
+          title: 'Confirm',
+          total: action.payload.Confirmed,
+          newTotal: 0,
+          background: 'blue',
+          model: 'card-covid'
+        },
+        {
+          title: 'Deaths',
+          total: action.payload.Deaths,
+          newTotal: 0,
+          background: 'red',
+          model: 'card-covid'
+        },
+        {
+          title: 'Recovered',
+          total: action.payload.Recovered,
+          newTotal: 0,
+          background: 'green',
+          model: 'card-covid'
+        }
+      ],
     }
   } else {
     return state

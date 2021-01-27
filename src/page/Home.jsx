@@ -10,12 +10,14 @@ const Home = (props) => {
     const stateRedux = useSelector(state => state)
     const { count } = stateRedux.count
     const { name } = stateRedux.user
-    const dataCovid = stateRedux.covid.allStatus
+    const dataCovidAllStatus = stateRedux.covid.allStatusCovid
+    const dataSummaryCovid = stateRedux.covid.summaryCovid
+    console.log(dataSummaryCovid)
     const dispatch = useDispatch()
-    const handleDetail = () => {
+    const handleDetail = (slug) => {
         props.history.push({ 
             pathname: '/detail-covid',
-            state: 'Hello hanif'
+            state: slug
            });
     }
     useEffect(() => {
@@ -31,7 +33,7 @@ const Home = (props) => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12" id="section2">
-                        <CardCovid data={dataCovid}/>
+                        <CardCovid data={dataCovidAllStatus}/>
                         {count}
                         <br/>
                         {name}
@@ -45,9 +47,9 @@ const Home = (props) => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-12">
-                        <table class="table">
-                            <thead class="thead-dark">
+                    <div className="col-md-12 wrapper-list-country">
+                        <table  className="table">
+                            <thead className="thead-dark">
                                 <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Code</th>
@@ -56,12 +58,14 @@ const Home = (props) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr onClick={()=> handleDetail() } className="list-country">
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
+                                {dataSummaryCovid.map((value, index) => 
+                                    <tr onClick={()=> handleDetail(value.Slug) } className="list-country">
+                                        <th scope="row">{index +1}</th>
+                                        <td>{value.CountryCode}</td>
+                                        <td>{value.Country}</td>
+                                        <td>{value.TotalConfirmed}</td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

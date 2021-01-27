@@ -15,7 +15,7 @@ const CardCovid = (props) => {
                 <div className="icon-arrow-up">
                   <img src={arrowUp} alt="arrow up"/>
                 </div>
-                <h6 className="mt-4">+20</h6>
+                <h6 className="mt-4">+{value.newTotal}</h6>
               </div>
             </div>
           </div>
